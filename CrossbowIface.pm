@@ -86,6 +86,7 @@ our $emrArgs = "";
 our $noLogs = 0;
 our $logs = "";
 our $noEmrDebugging = 0;
+our $ganglia = 0;
 
 # Job params
 our $input  = "";
@@ -328,6 +329,7 @@ GetOptions (
 	"logs:s"                    => \$logs,
 	"no-emr-debug"              => \$noEmrDebugging,
 	"swap:i"                    => \$swap,
+	"ganglia"					=> \$ganglia,
 # Job params
 	"input:s"                   => \$input,
 	"output:s"                  => \$output,
@@ -1448,6 +1450,10 @@ my $cmdJson = "$emrScript ".
     "--bootstrap-action s3://elasticmapreduce/bootstrap-actions/add-swap ".
     "--bootstrap-name \"Add Swap\" ".
     "--args \"$swap\"";
+
+if($ganglia && (!$localJob && !$hadoopJob)) {
+	$cmdJson .= " --bootstrap-action s3://elasticmapreduce/bootstrap-actions/install-ganglia --bootstrap-name \"Install Ganglia\"";
+}
 
 my $cmdSh = "sh $runLocalFile";
 my $cmdHadoop = "sh $runHadoopFile";
