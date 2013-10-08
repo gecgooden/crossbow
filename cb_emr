@@ -54,8 +54,8 @@ Options (defaults in []):
                          debugging enables the "Debug" button in the AWS
                          Console.  User must have SimpleDB account when this is
                          *not* specified. [off]
-  --ganglia              Uses Amazons ganglia install bootstrap action. More info 
-                         available at: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_Ganglia.html
+  --ganglia              Installs ganglia on the EMR cluster. Script must be on 
+                         S3. [s3://elasticmapreduce/bootstrap-actions/install-ganglia]
 
  Job params (don't affect results):
 
